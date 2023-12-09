@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Divertida con Alerta de Sonido</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        header {
+            background-color: #3498db;
+            padding: 20px;
+            color: white;
+            border-bottom: 2px solid #2980b9;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #ecf0f1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #27ae60;
+        }
+
+        form {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input,
+        textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .theme-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .comments-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .comment {
+            background-color: #dff9fb;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .surprise-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .surprise-img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .surprise-btn {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bienvenido a la Página Divertida</h1>
+        <div class="logo-container">
+            <img src="https://mdldstudios.files.wordpress.com/2023/11/picsart_23-01-01_22-02-22-508.jpg" alt="Tu Logo" class="logo" style="max-height: 80px;">
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="content">
+            <p>¡Aquí encontrarás cosas divertidas!</p>
+            <img src="https://placekitten.com/400/300" alt="Gatito Divertido">
+        </div>
+
+        <form>
+            <label for="comment">Déjanos tu comentario:</label>
+            <textarea id="comment" name="comment" rows="4" placeholder="Escribe aquí..."></textarea>
+            <input type="submit" value="Enviar comentario" class="btn">
+        </form>
+
+        <div class="comments-container">
+            <div class="comment">
+                <p>¡Gran página!</p>
+            </div>
+            <!-- Puedes agregar más comentarios aquí -->
+        </div>
+
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn" onmouseover="this.style.backgroundColor='#27ae60'" onmouseout="this.style.backgroundColor='#2ecc71'" onclick="showSurprise()">
+            ¡Clickea para una sorpresa!
+        </a>
+
+        <button class="surprise-btn" onclick="showSurprise()">Botón Sorpresa</button>
+    </div>
+
+    <button class="theme-btn" onclick="toggleTheme()">Cambiar Tema</button>
+
+    <!-- Reproductor de audio oculto -->
+    <audio id="alarmAudio" preload="auto" style="display:none">
+        <source src="https://www.youtube.com/watch?v=SvPsoX2rFYE" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentColor = window.getComputedStyle(body).getPropertyValue('background-color');
+            const newColor = currentColor === 'rgb(240, 240, 240)' ? '#2c3e50' : '#f0f0f0';
+            body.style.backgroundColor = newColor;
+        }
+
+        function playAlarm() {
+            var audio = document.getElementById('alarmAudio');
+            audio.play();
+        }
+
+        function showSurprise() {
+            playAlarm(); // Llama a esta función cuando quieras reproducir la alarma
+            const surpriseContainer = document.getElementById('surpriseContainer');
+            surpriseContainer.style.display = 'block';
+
+            setTimeout(() => {
+                surpriseContainer.style.display = 'none';
+            }, 200); // Ocultar después de 200 milisegundos (0.2 segundos)
+            
+            // Después de ocultar, mostrar nuevamente después de 200 milisegundos (0.2 segundos)
+            setTimeout(() => {
+                surpriseContainer.style.display = 'block';
+            }, 400);
+            
+            // Repetir el proceso para crear el efecto de parpadeo
+            setTimeout(() => {
+                surpriseContainer.style.display = 'none';
+            }, 600);
+            
+            setTimeout(() => {
+                surpriseContainer.style.display = 'block';
+            }, 800);
+        }
+    </script>
+
+    <div class="surprise-container" id="surpriseContainer" style="display: none;">
+        <p class="blink">¡Alerta de seguridad!</p>
+        <img src="https://static.vecteezy.com/system/resources/previews/011/030/483/original/warning-in-triangle-symbol-and-sign-png.png" alt="Advertencia" class="surprise-img">
+        <p class="blink">Haz sido hackeado y tienes 6 virus en tu sistema.</p>
+    </div>
+
+</body>
+</html>
